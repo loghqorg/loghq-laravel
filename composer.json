@@ -1,0 +1,69 @@
+{
+    "name": "loghq/loghq-laravel",
+    "description": "loghq log streaming - Laravel integration",
+    "type": "library",
+    "license": "MIT",
+    "homepage": "https://loghq.org",
+    "keywords": [
+        "loghq",
+        "logging",
+        "log-management",
+        "log-streaming",
+        "laravel"
+    ],
+    "support": {
+        "issues": "https://github.com/loghqorg/loghq-laravel/issues",
+        "source": "https://github.com/loghqorg/loghq-laravel"
+    },
+    "require": {
+        "php": ">=8.4",
+        "loghq/loghq": "^0.1",
+        "illuminate/support": "^11.0 || ^12.0",
+        "monolog/monolog": "^3.0"
+    },
+    "require-dev": {
+        "orchestra/testbench": "^9.0 || ^10.0",
+        "phpunit/phpunit": "^11.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "LogHQ\\Laravel\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "LogHQ\\Laravel\\Tests\\": "tests/"
+        }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "LogHQ\\Laravel\\LogHQServiceProvider"
+            ],
+            "aliases": {
+                "LogHQ": "LogHQ\\Laravel\\Facades\\LogHQ"
+            }
+        }
+    },
+    "scripts": {
+        "test": "phpunit"
+    },
+    "repositories": [
+        {
+            "type": "path",
+            "url": "../loghq-php",
+            "options": {
+                "symlink": true
+            }
+        },
+        {
+            "type": "vcs",
+            "url": "https://github.com/loghqorg/loghq-php"
+        }
+    ],
+    "config": {
+        "sort-packages": true
+    },
+    "minimum-stability": "stable",
+    "prefer-stable": true
+}
