@@ -1,0 +1,35 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          # Laravel 12 only. The package still supports illuminate ^11, but
+          # every Laravel 11 release is currently blocked by composer's
+          # security-advisory policy, so a testbench ^9 row cannot resolve a
+          # framework to test against and would fail for reasons that have
+          # nothing to do with this package.
+          - php: '8.4'
+            testbench: '^10.0'
+          - php: '8.5'
+            testbench: '^10.0'
+    steps:
+      - uses: actions/checkout@v4
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: curl, json
+          coverage: none
+      - run: composer require "orchestra/testbench:${{ matrix.testbench }}" --dev --no-update
+      # No lock file is committed, so this resolves loghq/loghq from the vcs
+      # repository in composer.json. It is not on Packagist yet.
+      - run: composer update --prefer-dist --no-progress
+      - run: composer test

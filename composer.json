@@ -50,8 +50,9 @@
     },
     "repositories": [
         {
+            "comment": "Local development convenience: when loghq-php is checked out alongside this package, it is symlinked in so changes are picked up without a release. The trailing glob is load-bearing - a plain path to a directory that does not exist is a hard composer error, which would break CI and every clean clone. A glob that matches nothing is simply skipped, and the vcs repository below resolves it instead.",
             "type": "path",
-            "url": "../loghq-php",
+            "url": "../loghq-php*",
             "options": {
                 "symlink": true
             }
