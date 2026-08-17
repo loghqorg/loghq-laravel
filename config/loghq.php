@@ -16,9 +16,11 @@ return [
     'dsn' => env('LOGHQ_DSN'),
     'project' => env('LOGHQ_PROJECT'),
     'key' => env('LOGHQ_KEY'),
-    // No default here: a default would override the host embedded in a DSN
-    // (explicit options win over DSN parts). Unset, the SDK's own default
-    // (https://loghq.org) applies when neither this nor a DSN provides one.
+    // Leave this unset. No default here on purpose: a default would override
+    // the host embedded in a DSN, since explicit options beat DSN parts. Unset,
+    // the SDK's own default applies, and the SDK is what should own where
+    // entries go - an app that pins a host has to be found and unpinned when
+    // that default moves. Set it only when you genuinely self-host.
     'host' => env('LOGHQ_HOST'),
 
     /*

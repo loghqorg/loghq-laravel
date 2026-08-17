@@ -21,7 +21,10 @@ abstract class TestCase extends Orchestra
     {
         $app['config']->set('loghq.project', 'demo');
         $app['config']->set('loghq.key', 'loghq_test');
-        $app['config']->set('loghq.host', 'http://localhost:3108');
+        // Explicit, and not the SDK default, so these tests keep asserting a
+        // host the config actually carried rather than silently tracking
+        // whatever Config::DEFAULT_HOST happens to be.
+        $app['config']->set('loghq.host', 'http://127.0.0.1:3008');
     }
 
     protected function setUp(): void

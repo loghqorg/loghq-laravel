@@ -43,8 +43,10 @@ php artisan vendor:publish --tag=loghq-config
 
 ## Quick start
 
-Set a key. It is a public, revocable project identifier, not a secret, so it is
-safe in `.env` and in app config:
+Set a key. That is the whole configuration: the key identifies the project, and
+the SDK owns where entries go, so there is no endpoint to set. It is a public,
+revocable identifier rather than a secret, so it is safe in `.env` and in app
+config:
 
 ```dotenv
 LOGHQ_KEY=loghq_your_project_key
@@ -99,7 +101,7 @@ Everything is env-driven. These are the defaults.
 | --- | --- | --- |
 | `LOGHQ_KEY` | none | Project ingest key. **Without it the client disables itself silently.** |
 | `LOGHQ_DSN` | none | `https://<key>@<host>/<project>` instead of the three parts separately. |
-| `LOGHQ_HOST` | `https://loghq.org` | Ingest host. Set it for a self-hosted loghq. |
+| `LOGHQ_HOST` | SDK default | Leave unset. Only for a self-hosted loghq. |
 | `LOGHQ_PROJECT` | none | Optional. The key alone already identifies the project. |
 | `LOGHQ_ENABLED` | `true` | Master switch. `false` keeps the channel resolving and drops every record. |
 | `LOGHQ_LEVEL` | `debug` | SDK-side severity floor, applied after the channel's own `level`. |
