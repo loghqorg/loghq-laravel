@@ -241,12 +241,29 @@ the return value of a direct call as shown above before digging further.
 ## Testing
 
 ```sh
+composer install
 composer test
 ```
 
 The suite runs against real Laravel via `orchestra/testbench`, with the
 transport swapped for a capture double, so assertions are made on the exact
 payload that would have gone over the wire.
+
+`loghq/loghq` resolves from its GitHub repository, the same way CI and any
+consuming application get it. To work on both packages at once, point composer
+at a local checkout without committing that:
+
+```sh
+composer config repositories.local path ../loghq-php
+composer update loghq/loghq
+# and to go back
+composer config --unset repositories.local
+```
+
+Do not commit a `path` repository here. It is a hard composer error when the
+directory is absent, which breaks CI and every clean clone, and being canonical
+and higher priority it also shadows the tagged release, so a version constraint
+that the vcs repository satisfies perfectly well becomes unresolvable.
 
 ## License
 

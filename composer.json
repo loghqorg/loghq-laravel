@@ -17,7 +17,7 @@
     },
     "require": {
         "php": ">=8.4",
-        "loghq/loghq": "^0.1",
+        "loghq/loghq": "^0.1.1",
         "illuminate/support": "^11.0 || ^12.0",
         "monolog/monolog": "^3.0"
     },
@@ -49,14 +49,6 @@
         "test": "phpunit"
     },
     "repositories": [
-        {
-            "comment": "Local development convenience: when loghq-php is checked out alongside this package, it is symlinked in so changes are picked up without a release. The trailing glob is load-bearing - a plain path to a directory that does not exist is a hard composer error, which would break CI and every clean clone. A glob that matches nothing is simply skipped, and the vcs repository below resolves it instead.",
-            "type": "path",
-            "url": "../loghq-php*",
-            "options": {
-                "symlink": true
-            }
-        },
         {
             "type": "vcs",
             "url": "https://github.com/loghqorg/loghq-php"
